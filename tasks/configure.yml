@@ -1,0 +1,36 @@
+# This source file is subject to the (Open Source Initiative) BSD license
+# that is bundled with this package in the LICENSE file. It is also available
+# through the world-wide-web at this URL: http://www.ontic.com.au/license.html
+# If you did not receive a copy of the license and are unable to obtain it through
+# the world-wide-web, please send an email to license@ontic.com.au immediately.
+# Copyright (c) 2010-2015 Ontic. (http://www.ontic.com.au). All rights reserved.
+
+---
+
+- name: NTP | Configure NTP timezone file.
+  sudo: yes
+  file:
+    src: '/usr/share/zoneinfo/{{ ntp_timezone }}'
+    dest: /etc/localtime
+    state: link
+    force: yes
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart ntp
+  tags:
+    - configure
+    - ntp
+
+- name: NTP | Configure NTP conf file.
+  sudo: yes
+  template:
+    src: ntp.j2
+    dest: /etc/ntp.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart ntp
+  tags:
+    - configure
+    - ntp

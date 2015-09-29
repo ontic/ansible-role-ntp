@@ -1,0 +1,52 @@
+# This source file is subject to the (Open Source Initiative) BSD license
+# that is bundled with this package in the LICENSE file. It is also available
+# through the world-wide-web at this URL: http://www.ontic.com.au/license.html
+# If you did not receive a copy of the license and are unable to obtain it through
+# the world-wide-web, please send an email to license@ontic.com.au immediately.
+# Copyright (c) 2010-2015 Ontic. (http://www.ontic.com.au). All rights reserved.
+
+---
+
+- name: NTP | Debian | Install specific NTP version.
+  sudo: yes
+  apt:
+    pkg: 'ntp={{ ntp_pkg_version }}'
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+  when: ansible_os_family == 'Debian' and ntp_pkg_version
+  tags:
+    - package
+    - ntp
+
+- name: NTP | RedHat | Install specific NTP version.
+  sudo: yes
+  yum:
+    name: 'ntp={{ ntp_pkg_version }}'
+    state: present
+  when: ansible_os_family == 'RedHat' and ntp_pkg_version
+  tags:
+    - package
+    - ntp
+
+- name: NTP | Debian | Install latest NTP version.
+  sudo: yes
+  apt:
+    pkg: ntp
+    state: '{{ ntp_pkg_state }}'
+    update_cache: yes
+    cache_valid_time: 3600
+  when: ansible_os_family == 'Debian' and not ntp_pkg_version
+  tags:
+    - package
+    - ntp
+
+- name: NTP | RedHat | Install latest NTP version.
+  sudo: yes
+  yum:
+    name: ntp
+    state: '{{ ntp_pkg_state }}'
+  when: ansible_os_family == 'RedHat' and not ntp_pkg_version
+  tags:
+    - package
+    - ntp

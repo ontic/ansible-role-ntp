@@ -1,0 +1,29 @@
+# This source file is subject to the (Open Source Initiative) BSD license
+# that is bundled with this package in the LICENSE file. It is also available
+# through the world-wide-web at this URL: http://www.ontic.com.au/license.html
+# If you did not receive a copy of the license and are unable to obtain it through
+# the world-wide-web, please send an email to license@ontic.com.au immediately.
+# Copyright (c) 2010-2015 Ontic. (http://www.ontic.com.au). All rights reserved.
+
+---
+
+language: python
+
+python:
+  - 2.7
+
+before_install:
+  - sudo apt-get update -qq
+
+install:
+  - pip install ansible
+  - ansible --version
+
+script:
+  - ansible-playbook -i tests/inventory tests/playbook.yml --syntax-check
+  - ansible-playbook -i tests/inventory tests/playbook.yml --connection=local --sudo
+  - >
+    ansible-playbook -i tests/inventory tests/playbook.yml --connection=local --sudo
+    | grep -q 'changed=0.*unreachable=0.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)

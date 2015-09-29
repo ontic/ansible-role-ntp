@@ -1,0 +1,32 @@
+# This source file is subject to the (Open Source Initiative) BSD license
+# that is bundled with this package in the LICENSE file. It is also available
+# through the world-wide-web at this URL: http://www.ontic.com.au/license.html
+# If you did not receive a copy of the license and are unable to obtain it through
+# the world-wide-web, please send an email to license@ontic.com.au immediately.
+# Copyright (c) 2010-2015 Ontic. (http://www.ontic.com.au). All rights reserved.
+
+---
+
+ntp_timezone: UTC
+ntp_pkg_version:
+ntp_pkg_state: latest
+ntp_service_state: started
+ntp_service_enabled: yes
+ntp_drift_file: /var/lib/ntp/ntp.drift
+ntp_statistics_dir:
+ntp_statistics: 'loopstats peerstats clockstats'
+ntp_file_generation_sets:
+  - 'filegen loopstats file loopstats type day enable'
+  - 'filegen peerstats file peerstats type day enable'
+  - 'filegen clockstats file clockstats type day enable'
+ntp_servers:
+  - 0.ubuntu.pool.ntp.org
+  - 1.ubuntu.pool.ntp.org
+  - 2.ubuntu.pool.ntp.org
+  - 3.ubuntu.pool.ntp.org
+  - ntp.ubuntu.com
+ntp_restrictions:
+  - 'restrict -4 default kod notrap nomodify nopeer noquery'
+  - 'restrict -6 default kod notrap nomodify nopeer noquery'
+  - 'restrict 127.0.0.1'
+  - 'restrict ::1'
