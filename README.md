@@ -2,6 +2,7 @@
 
 | Branch             | Build               | Galaxy              | Release              |
 | :----------------- | :------------------ | :------------------ | :------------------- |
+| **master**         | [![Build](https://img.shields.io/travis/ontic/ansible-role-ntp/master.svg)](https://travis-ci.org/ontic/ansible-role-ntp) | [![Galaxy](https://img.shields.io/badge/galaxy-ontic.ntp-blue.svg)](https://galaxy.ansible.com/list#/roles/5312) | [![Release](https://img.shields.io/github/release/ontic/ansible-role-ntp.svg)](https://github.com/ontic/ansible-role-ntp/releases) |
 
 ## Introduction
 
