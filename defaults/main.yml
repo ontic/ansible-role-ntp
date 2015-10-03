@@ -9,7 +9,7 @@
 
 ntp_timezone: UTC
 ntp_pkg_version:
-ntp_pkg_state: latest
+ntp_pkg_state: present
 ntp_service_state: started
 ntp_service_enabled: yes
 ntp_drift_file: /var/lib/ntp/ntp.drift

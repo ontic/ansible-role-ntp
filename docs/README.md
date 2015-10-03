@@ -31,7 +31,7 @@ ntp_pkg_version:
 The NTP package version you want to install. If the value is left *undefined* `ntp_pkg_state` will be used.
 
 ```
-ntp_pkg_state: latest
+ntp_pkg_state: present
 ```
 
 The desired NTP package state, valid values are `latest`, `present`, or `absent`.
