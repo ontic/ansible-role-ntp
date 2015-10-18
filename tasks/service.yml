@@ -9,7 +9,7 @@
 
 - name: NTP | Enable NTP service.
   service:
-    name: '{{ ntp_daemon }}'
+    name: '{{ ntp_service_name }}'
     state: '{{ ntp_service_state }}'
     enabled: '{{ ntp_service_enabled }}'
   tags:

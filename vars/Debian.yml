@@ -7,4 +7,4 @@
 
 ---
 
-ntp_daemon: ntp
+ntp_service_name: ntp
