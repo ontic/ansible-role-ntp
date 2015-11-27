@@ -43,7 +43,7 @@ If you have multiple roles to install, the ansible-galaxy CLI can be fed a `requ
 ```
 
 ```
-$ ansible-galaxy install -r requirements.txt
+$ ansible-galaxy install -r requirements.yml
 ```
 
 Alternatively you could download the source by setting the repository in your `requirements.yml` file:
