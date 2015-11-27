@@ -69,6 +69,14 @@ Enable the role in your playbook file.
 
 Full documentation is available in the [docs](/docs) directory.
 
+## Contributors
+
+Below lists all individuals having contributed to the repository. If you would like to get involved, we encourage
+you to so by making a [pull](/pulls) request or submitting an [issue](/issues).
+
+* [Adam Dyson](https://github.com/adamdyson)
+* [Evgeny Lebedev](https://github.com/lebe-dev)
+
 ## License
 
 Licensed under the BSD License. See the [LICENSE](/LICENSE) file for details.

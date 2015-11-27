@@ -49,6 +49,18 @@ ntp_service_enabled: yes
 Whether the NTP service should start on boot, valid values are `yes`, or `no`.
 
 ```
+ntp_tzdata_pkg_version:
+```
+
+The TZ Database package version you want to install. If the value is left *undefined* `ntp_tzdata_pkg_state` will be used.
+
+```
+ntp_tzdata_pkg_state: present
+```
+
+The desired TZ Database package state, valid values are `latest`, `present`, or `absent`.
+
+```
 ntp_drift_file: /var/lib/ntp/ntp.drift
 ```
 
