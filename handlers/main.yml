@@ -12,4 +12,3 @@
   service:
     name: '{{ ntp_service_name }}'
     state: restarted
-  when: ntp_service_state == 'started' and not ntp_pkg_state == 'absent'

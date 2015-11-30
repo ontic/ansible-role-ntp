@@ -8,12 +8,10 @@
 ---
 
 ntp_timezone: UTC
-ntp_pkg_version:
-ntp_pkg_state: present
+ntp_packages:
+ntp_service_name:
 ntp_service_state: started
 ntp_service_enabled: yes
-ntp_tzdata_pkg_version:
-ntp_tzdata_pkg_state: present
 ntp_drift_file: /var/lib/ntp/ntp.drift
 ntp_statistics_dir:
 ntp_statistics: 'loopstats peerstats clockstats'

@@ -7,90 +7,40 @@
 
 ---
 
-- name: NTP | Debian | Install specific NTP version.
+- name: NTP | Debian | Install NTP packages.
   sudo: yes
   apt:
-    pkg: 'ntp={{ ntp_pkg_version }}'
-    state: present
-    update_cache: yes
-    cache_valid_time: 3600
-  when: ansible_os_family == 'Debian' and ntp_pkg_version
+    name: '{{ item.name if item.version is not defined else item.name + "=" + item.version }}'
+    cache_valid_time: '{{ item.cache_valid_time | default(omit) }}'
+    deb: '{{ item.deb | default(omit) }}'
+    default_release: '{{ item.default_release | default(omit) }}'
+    dpkg_options: '{{ item.dpkg_options | default(omit) }}'
+    force: '{{ item.force | default(omit) }}'
+    install_recommends: '{{ item.install_recommends | default(omit) }}'
+    purge: '{{ item.purge | default(omit) }}'
+    state: '{{ item.state | default(omit) }}'
+    update_cache: '{{ item.update_cache | default(omit) }}'
+    upgrade: '{{ item.upgrade | default(omit) }}'
+  with_items: ntp_packages
+  when: ansible_os_family == 'Debian' and ntp_packages
   tags:
     - package
     - ntp
 
-- name: NTP | RedHat | Install specific NTP version.
+- name: NTP | RedHat | Install NTP packages.
   sudo: yes
   yum:
-    name: 'ntp={{ ntp_pkg_version }}'
-    state: present
-  when: ansible_os_family == 'RedHat' and ntp_pkg_version
-  tags:
-    - package
-    - ntp
-
-- name: NTP | Debian | Install latest NTP version.
-  sudo: yes
-  apt:
-    pkg: ntp
-    state: '{{ ntp_pkg_state }}'
-    update_cache: yes
-    cache_valid_time: 3600
-  when: ansible_os_family == 'Debian' and not ntp_pkg_version
-  tags:
-    - package
-    - ntp
-
-- name: NTP | RedHat | Install latest NTP version.
-  sudo: yes
-  yum:
-    name: ntp
-    state: '{{ ntp_pkg_state }}'
-  when: ansible_os_family == 'RedHat' and not ntp_pkg_version
-  tags:
-    - package
-    - ntp
-
-- name: NTP | Debian | Install specific TZ Database version.
-  sudo: yes
-  apt:
-    pkg: 'tzdata={{ ntp_tzdata_pkg_version }}'
-    state: present
-    update_cache: yes
-    cache_valid_time: 3600
-  when: ansible_os_family == 'Debian' and ntp_tzdata_pkg_version
-  tags:
-    - package
-    - ntp
-
-- name: NTP | RedHat | Install specific TZ Database version.
-  sudo: yes
-  yum:
-    name: 'tzdata={{ ntp_tzdata_pkg_version }}'
-    state: present
-  when: ansible_os_family == 'RedHat' and ntp_tzdata_pkg_version
-  tags:
-    - package
-    - ntp
-
-- name: NTP | Debian | Install latest TZ Database version.
-  sudo: yes
-  apt:
-    pkg: tzdata
-    state: '{{ ntp_tzdata_pkg_state }}'
-    update_cache: yes
-    cache_valid_time: 3600
-  when: ansible_os_family == 'Debian' and not ntp_tzdata_pkg_version
-  tags:
-    - package
-    - ntp
-
-- name: NTP | RedHat | Install latest TZ Database version.
-  sudo: yes
-  yum:
-    name: tzdata
-    state: '{{ ntp_tzdata_pkg_state }}'
-  when: ansible_os_family == 'RedHat' and not ntp_tzdata_pkg_version
+    name: '{{ item.name if item.version is not defined else item.name + "-" + item.version }}'
+    conf_file: '{{ item.conf_file | default(omit) }}'
+    disable_gpg_check: '{{ item.disable_gpg_check | default(omit) }}'
+    disablerepo: '{{ item.disablerepo | default(omit) }}'
+    enablerepo: '{{ item.enablerepo | default(omit) }}'
+    exclude: '{{ item.exclude | default(omit) }}'
+    list: '{{ item.list | default(omit) }}'
+    state: '{{ item.state | default(omit) }}'
+    update_cache: '{{ item.update_cache | default(omit) }}'
+  with_items: ntp_packages
+  when: ansible_os_family == 'RedHat' and ntp_packages
   tags:
     - package
     - ntp

@@ -25,16 +25,24 @@ and other Unix systems. See this [page](https://en.wikipedia.org/wiki/List_of_tz
 to find a timezone for your region.
 
 ```
-ntp_pkg_version:
+ntp_packages:
 ```
 
-The NTP package version you want to install. If the value is left *undefined* `ntp_pkg_state` will be used.
+A list of the NTP packages to install. Each package supports all parameters from the
+[apt](http://docs.ansible.com/ansible/apt_module.html) or [yum](http://docs.ansible.com/ansible/yum_module.html) modules.
+If the value remains omitted, the following packages will be installed by default.
+
+| Debian/Ubuntu          | RedHat/CentOS           |
+| :--------------------- | :---------------------- |
+| ntp                    | ntp                     |
+| tzdata                 | tzdata                  |
 
 ```
-ntp_pkg_state: present
+ntp_service_name:
 ```
 
-The desired NTP package state, valid values are `latest`, `present`, or `absent`.
+The name of the daemon under which NTP runs. Typically this can be omitted since it's automatically determined
+based on the target operating system. For RedHat/CentOS this is `ntpd` and Debian/Ubuntu it's `ntp`.
 
 ```
 ntp_service_state: started
@@ -47,18 +55,6 @@ ntp_service_enabled: yes
 ```
 
 Whether the NTP service should start on boot, valid values are `yes`, or `no`.
-
-```
-ntp_tzdata_pkg_version:
-```
-
-The TZ Database package version you want to install. If the value is left *undefined* `ntp_tzdata_pkg_state` will be used.
-
-```
-ntp_tzdata_pkg_state: present
-```
-
-The desired TZ Database package state, valid values are `latest`, `present`, or `absent`.
 
 ```
 ntp_drift_file: /var/lib/ntp/ntp.drift
