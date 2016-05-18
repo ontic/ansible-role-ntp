@@ -3,12 +3,12 @@
 # through the world-wide-web at this URL: http://www.ontic.com.au/license.html
 # If you did not receive a copy of the license and are unable to obtain it through
 # the world-wide-web, please send an email to license@ontic.com.au immediately.
-# Copyright (c) 2010-2015 Ontic. (http://www.ontic.com.au). All rights reserved.
+# Copyright (c) 2010-2016 Ontic. (http://www.ontic.com.au). All rights reserved.
 
 ---
 
 - name: NTP | Configure NTP timezone file.
-  sudo: yes
+  become: yes
   file:
     src: '/usr/share/zoneinfo/{{ ntp_timezone }}'
     dest: /etc/localtime
@@ -23,7 +23,7 @@
     - ntp
 
 - name: NTP | Configure NTP conf file.
-  sudo: yes
+  become: yes
   template:
     src: ntp.j2
     dest: /etc/ntp.conf

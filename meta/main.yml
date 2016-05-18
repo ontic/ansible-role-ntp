@@ -3,7 +3,7 @@
 # through the world-wide-web at this URL: http://www.ontic.com.au/license.html
 # If you did not receive a copy of the license and are unable to obtain it through
 # the world-wide-web, please send an email to license@ontic.com.au immediately.
-# Copyright (c) 2010-2015 Ontic. (http://www.ontic.com.au). All rights reserved.
+# Copyright (c) 2010-2016 Ontic. (http://www.ontic.com.au). All rights reserved.
 
 ---
 
@@ -14,21 +14,22 @@ galaxy_info:
   description: This role installs NTP on RedHat/CentOS and Debian/Ubuntu Linux servers.
   company: Ontic
   license: BSD-3-Clause
-  min_ansible_version: 1.9
+  min_ansible_version: 2.0
   platforms:
-  - name: Ubuntu
-    versions:
-    - precise
-    - trusty
-  - name: Debian
-    versions:
-    - wheezy
-    - jessie
-  - name: EL
-    versions:
-    - 6
-    - 7
-  galaxy_tags:
+    - name: Ubuntu
+      versions:
+        - precise
+        - trusty
+        - xenial
+    - name: Debian
+      versions:
+        - wheezy
+        - jessie
+    - name: EL
+      versions:
+        - 6
+        - 7
+  categories:
     - ontic
     - system
     - ntp
