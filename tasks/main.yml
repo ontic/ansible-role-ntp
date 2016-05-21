@@ -9,16 +9,22 @@
 
 - name: NTP | Include OS-specific variables.
   include_vars: '{{ ansible_os_family }}.yml'
+  tags:
+    - always
 
 - name: NTP | Define NTP service name.
   set_fact:
     ntp_service_name: '{{ ntp_default_service_name }}'
   when: not ntp_service_name
+  tags:
+    - always
 
 - name: NTP | Define NTP packages.
   set_fact:
     ntp_packages: '{{ ntp_default_packages | list }}'
   when: not ntp_packages
+  tags:
+    - always
 
 - include: package.yml
 - include: configure.yml

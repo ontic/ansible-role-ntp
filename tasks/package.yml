@@ -24,8 +24,9 @@
   with_items: '{{ ntp_packages }}'
   when: ansible_os_family == 'Debian' and ntp_packages
   tags:
-    - package
     - ntp
+    - ntp-package
+    - package
 
 - name: NTP | RedHat | Install NTP packages.
   become: yes
@@ -42,5 +43,6 @@
   with_items: '{{ ntp_packages }}'
   when: ansible_os_family == 'RedHat' and ntp_packages
   tags:
-    - package
     - ntp
+    - ntp-package
+    - package

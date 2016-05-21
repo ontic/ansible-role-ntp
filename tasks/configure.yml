@@ -19,8 +19,9 @@
     mode: 0644
   notify: restart ntp
   tags:
-    - configure
     - ntp
+    - ntp-configure
+    - configure
 
 - name: NTP | Configure NTP conf file.
   become: yes
@@ -32,5 +33,6 @@
     mode: 0644
   notify: restart ntp
   tags:
-    - configure
     - ntp
+    - ntp-configure
+    - configure
