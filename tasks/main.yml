@@ -27,5 +27,19 @@
     - always
 
 - include: package.yml
+  tags:
+    - ntp
+    - ntp-package
+    - package
+
 - include: configure.yml
+  tags:
+    - ntp
+    - ntp-configure
+    - configure
+
 - include: service.yml
+  tags:
+    - ntp
+    - ntp-service
+    - service

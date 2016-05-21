@@ -12,7 +12,3 @@
     name: '{{ ntp_service_name }}'
     state: '{{ ntp_service_state }}'
     enabled: '{{ ntp_service_enabled }}'
-  tags:
-    - ntp
-    - ntp-service
-    - service

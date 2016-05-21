@@ -23,10 +23,6 @@
     upgrade: '{{ item.upgrade | default(omit) }}'
   with_items: '{{ ntp_packages }}'
   when: ansible_os_family == 'Debian' and ntp_packages
-  tags:
-    - ntp
-    - ntp-package
-    - package
 
 - name: NTP | RedHat | Install NTP packages.
   become: yes
@@ -42,7 +38,3 @@
     update_cache: '{{ item.update_cache | default(omit) }}'
   with_items: '{{ ntp_packages }}'
   when: ansible_os_family == 'RedHat' and ntp_packages
-  tags:
-    - ntp
-    - ntp-package
-    - package
