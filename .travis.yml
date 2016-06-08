@@ -7,23 +7,43 @@
 
 ---
 
-language: python
+sudo: 'required'
 
-python:
-  - 2.7
+env:
+  - distribution: 'centos'
+    version: '7'
+    init: '/usr/lib/systemd/systemd'
+    run_opts: '--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro'
+    playbook: 'playbook.yml'
+  - distribution: 'ubuntu'
+    version: '16.04'
+    init: '/lib/systemd/systemd'
+    run_opts: '--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro'
+    playbook: 'playbook.yml'
+
+services:
+  - 'docker'
 
 before_install:
-  - sudo apt-get update -qq
-
-install:
-  - pip install ansible
-  - ansible --version
+  - 'sudo docker pull ${distribution}:${version}'
+  - 'sudo docker build --rm=true --file=tests/docker/Dockerfile.${distribution}-${version} --tag=${distribution}-${version}:ansible tests'
 
 script:
-  - ansible-playbook -i tests/inventory tests/playbook.yml --syntax-check
-  - ansible-playbook -i tests/inventory tests/playbook.yml --connection=local --sudo
+  - 'container_id=$(mktemp)'
+  - 'sudo docker run --detach --volume="${PWD}":/etc/ansible/roles/role_under_test:ro ${run_opts} ${distribution}-${version}:ansible "${init}" > "${container_id}"'
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/${playbook} --syntax-check'
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/${playbook}'
   - >
-    ansible-playbook -i tests/inventory tests/playbook.yml --connection=local --sudo
-    | tee /tmp/output.txt; grep -q 'changed=0.*unreachable=0.*failed=0' /tmp/output.txt
-    && (echo 'Idempotence test: pass' && exit 0)
-    || (echo 'Idempotence test: fail' && exit 1)
+    sudo docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/role_under_test/tests/${playbook}
+    | tee /tmp/output.txt; grep -q "changed=0.*unreachable=0.*failed=0" /tmp/output.txt
+    && (echo "Idempotence test: Passed" && exit 0)
+    || (echo "Idempotence test: Failed" && exit 1)
+  - 'sudo docker stop "$(cat ${container_id})"'
+
+notifications:
+  webhooks:
+    urls:
+      - 'https://galaxy.ansible.com/api/v1/notifications/'
+    on_success: 'always'
+    on_failure: 'never'
+    on_start: 'never'

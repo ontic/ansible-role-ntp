@@ -7,7 +7,7 @@
 
 ---
 
-- name: NTP | Debian | Install NTP packages.
+- name: 'NTP | Debian | Install NTP packages.'
   become: yes
   apt:
     name: '{{ item.name if item.version is not defined else item.name + "=" + item.version }}'
@@ -22,9 +22,9 @@
     update_cache: '{{ item.update_cache | default(omit) }}'
     upgrade: '{{ item.upgrade | default(omit) }}'
   with_items: '{{ ntp_packages }}'
-  when: ansible_os_family == 'Debian' and ntp_packages
+  when: 'ansible_os_family == "Debian"'
 
-- name: NTP | RedHat | Install NTP packages.
+- name: 'NTP | RedHat | Install NTP packages.'
   become: yes
   yum:
     name: '{{ item.name if item.version is not defined else item.name + "-" + item.version }}'
@@ -37,4 +37,4 @@
     state: '{{ item.state | default(omit) }}'
     update_cache: '{{ item.update_cache | default(omit) }}'
   with_items: '{{ ntp_packages }}'
-  when: ansible_os_family == 'RedHat' and ntp_packages
+  when: 'ansible_os_family == "RedHat"'

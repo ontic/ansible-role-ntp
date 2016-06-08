@@ -7,6 +7,6 @@
 
 ---
 
-- hosts: all
+- hosts: 'all'
   roles:
-    - { role: ../../ }
+    - { role: 'role_under_test' }

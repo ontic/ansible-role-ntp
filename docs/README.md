@@ -3,13 +3,13 @@
 ## Example
 
 ```
-ntp_timezone: Australia/Melbourne
+ntp_timezone: 'Australia/Melbourne'
 ntp_servers:
-  - 0.au.pool.ntp.org
-  - 1.au.pool.ntp.org
-  - 2.au.pool.ntp.org
-  - 3.au.pool.ntp.org
-  - ntp.ubuntu.com
+  - '0.au.pool.ntp.org'
+  - '1.au.pool.ntp.org'
+  - '2.au.pool.ntp.org'
+  - '3.au.pool.ntp.org'
+  - 'ntp.ubuntu.com'
 ```
 
 ## Role Variables
@@ -17,7 +17,7 @@ ntp_servers:
 Available variables are listed below, along with default values (see [defaults/main.yml](/defaults/main.yml)):
 
 ```
-ntp_timezone: UTC
+ntp_timezone: 'UTC'
 ```
 
 The timezone you want to configure. Valid values are based on the tz (timezone) database used by Linux
@@ -45,7 +45,7 @@ The name of the daemon under which NTP runs. Typically this can be omitted since
 based on the target operating system. For RedHat/CentOS this is `ntpd` and Debian/Ubuntu it's `ntp`.
 
 ```
-ntp_service_state: started
+ntp_service_state: 'started'
 ```
 
 The desired NTP service state, valid values are `started`, `stopped`, `restarted` or `reloaded`.
@@ -57,7 +57,16 @@ ntp_service_enabled: yes
 Whether the NTP service should start on boot, valid values are `yes`, or `no`.
 
 ```
-ntp_drift_file: /var/lib/ntp/ntp.drift
+ntp_conf_template: 'default/ntp.j2'
+```
+
+The NTP configuration template file processed by the Jinja2 templating language. Most variables
+within this role are consumed by this template, if for some reason you need to offer more settings than
+this template provides, you can override this value with a template of your choice.
+
+
+```
+ntp_drift_file: '/var/lib/ntp/ntp.drift'
 ```
 
 The name and path of the drift file. This file stores the frequency offset between the system clock
@@ -89,11 +98,11 @@ provide access to a set of files used to store the actual data.
 
 ```
 ntp_servers:
-  - 0.ubuntu.pool.ntp.org
-  - 1.ubuntu.pool.ntp.org
-  - 2.ubuntu.pool.ntp.org
-  - 3.ubuntu.pool.ntp.org
-  - ntp.ubuntu.com
+  - '0.ubuntu.pool.ntp.org'
+  - '1.ubuntu.pool.ntp.org'
+  - '2.ubuntu.pool.ntp.org'
+  - '3.ubuntu.pool.ntp.org'
+  - 'ntp.ubuntu.com'
 ```
 
 The servers that will be used to synchronize the local time. In client mode the client clock can synchronize

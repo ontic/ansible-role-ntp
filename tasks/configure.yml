@@ -7,24 +7,24 @@
 
 ---
 
-- name: NTP | Configure NTP timezone file.
+- name: 'NTP | Configure NTP timezone file.'
   become: yes
   file:
     src: '/usr/share/zoneinfo/{{ ntp_timezone }}'
-    dest: /etc/localtime
-    state: link
+    dest: '/etc/localtime'
+    state: 'link'
     force: yes
-    owner: root
-    group: root
-    mode: 0644
-  notify: restart ntp
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify: 'restart ntp'
 
-- name: NTP | Configure NTP conf file.
+- name: 'NTP | Configure NTP conf file.'
   become: yes
   template:
-    src: ntp.j2
-    dest: /etc/ntp.conf
-    owner: root
-    group: root
-    mode: 0644
-  notify: restart ntp
+    src: '{{ ntp_conf_template }}'
+    dest: '/etc/ntp.conf'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify: 'restart ntp'

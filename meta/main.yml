@@ -10,28 +10,28 @@
 dependencies: []
 
 galaxy_info:
-  author: Adam Dyson
-  description: This role installs NTP on RedHat/CentOS and Debian/Ubuntu Linux servers.
-  company: Ontic
-  license: BSD-3-Clause
-  min_ansible_version: 2.0
+  author: 'Adam Dyson'
+  description: 'This role installs NTP on RedHat/CentOS and Debian/Ubuntu Linux servers.'
+  company: 'Ontic'
+  license: 'BSD-3-Clause'
+  min_ansible_version: '2.1'
   platforms:
-    - name: Ubuntu
+    - name: 'Ubuntu'
       versions:
-        - precise
-        - trusty
-        - xenial
-    - name: Debian
+        - 'precise'
+        - 'trusty'
+        - 'xenial'
+    - name: 'Debian'
       versions:
-        - wheezy
-        - jessie
-    - name: EL
+        - 'wheezy'
+        - 'jessie'
+    - name: 'EL'
       versions:
-        - 6
-        - 7
-  categories:
-    - ontic
-    - system
-    - ntp
-    - time
-    - date
+        - '6'
+        - '7'
+  galaxy_tags:
+    - 'ontic'
+    - 'system'
+    - 'ntp'
+    - 'time'
+    - 'date'

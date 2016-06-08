@@ -1,0 +1,29 @@
+# {{ ansible_managed }}
+
+driftfile {{ ntp_drift_file }}
+
+{% if ntp_statistics_dir %}
+statsdir {{ ntp_statistics_dir }}
+{% endif %}
+
+{% if ntp_statistics %}
+statistics {{ ntp_statistics }}
+{% endif %}
+
+{% if ntp_file_generation_sets %}
+{% for filegen in ntp_file_generation_sets %}
+{{ filegen }}
+{% endfor %}
+{% endif %}
+
+{% if ntp_servers %}
+{% for server in ntp_servers %}
+server {{ server }}
+{% endfor %}
+{% endif %}
+
+{% if ntp_restrictions %}
+{% for restrict in ntp_restrictions %}
+{{ restrict }}
+{% endfor %}
+{% endif %}

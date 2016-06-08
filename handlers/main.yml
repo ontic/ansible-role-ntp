@@ -7,8 +7,8 @@
 
 ---
 
-- name: restart ntp
+- name: 'restart ntp'
   become: yes
   service:
     name: '{{ ntp_service_name }}'
-    state: restarted
+    state: 'restarted'

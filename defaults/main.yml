@@ -7,12 +7,13 @@
 
 ---
 
-ntp_timezone: UTC
+ntp_timezone: 'UTC'
 ntp_packages:
 ntp_service_name:
-ntp_service_state: started
+ntp_service_state: 'started'
 ntp_service_enabled: yes
-ntp_drift_file: /var/lib/ntp/ntp.drift
+ntp_conf_template: 'default/ntp.j2'
+ntp_drift_file: '/var/lib/ntp/ntp.drift'
 ntp_statistics_dir:
 ntp_statistics: 'loopstats peerstats clockstats'
 ntp_file_generation_sets:
@@ -20,11 +21,11 @@ ntp_file_generation_sets:
   - 'filegen peerstats file peerstats type day enable'
   - 'filegen clockstats file clockstats type day enable'
 ntp_servers:
-  - 0.ubuntu.pool.ntp.org
-  - 1.ubuntu.pool.ntp.org
-  - 2.ubuntu.pool.ntp.org
-  - 3.ubuntu.pool.ntp.org
-  - ntp.ubuntu.com
+  - '0.ubuntu.pool.ntp.org'
+  - '1.ubuntu.pool.ntp.org'
+  - '2.ubuntu.pool.ntp.org'
+  - '3.ubuntu.pool.ntp.org'
+  - 'ntp.ubuntu.com'
 ntp_restrictions:
   - 'restrict -4 default kod notrap nomodify nopeer noquery'
   - 'restrict -6 default kod notrap nomodify nopeer noquery'
