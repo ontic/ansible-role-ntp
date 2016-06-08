@@ -12,7 +12,7 @@ ntp_packages:
 ntp_service_name:
 ntp_service_state: 'started'
 ntp_service_enabled: yes
-ntp_conf_template: 'default/ntp.j2'
+ntp_conf_template: 'ntp.j2'
 ntp_drift_file: '/var/lib/ntp/ntp.drift'
 ntp_statistics_dir:
 ntp_statistics: 'loopstats peerstats clockstats'

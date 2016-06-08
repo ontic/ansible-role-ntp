@@ -57,7 +57,7 @@ ntp_service_enabled: yes
 Whether the NTP service should start on boot, valid values are `yes`, or `no`.
 
 ```
-ntp_conf_template: 'default/ntp.j2'
+ntp_conf_template: 'ntp.j2'
 ```
 
 The NTP configuration template file processed by the Jinja2 templating language. Most variables
