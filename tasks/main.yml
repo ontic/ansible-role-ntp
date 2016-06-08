@@ -21,7 +21,7 @@
 - name: 'NTP | Define NTP service name.'
   set_fact:
     ntp_service_name: '{{ ntp_default_service_name }}'
-  when: '{{ ntp_service_name | default(None) != None }}'
+  when: "ntp_service_name | default(None) != None"
   tags:
     - 'ntp'
     - 'ntp-package'
@@ -34,7 +34,7 @@
 - name: 'NTP | Define NTP packages.'
   set_fact:
     ntp_packages: '{{ ntp_default_packages }}'
-  when: '{{ ntp_packages | default(None) != None }}'
+  when: "ntp_packages | default(None) != None"
   tags:
     - 'ntp'
     - 'ntp-package'
