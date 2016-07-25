@@ -1,9 +1,9 @@
 FROM ubuntu:16.04
 RUN apt-get update
 
-RUN apt -y install libffi-dev libssl-dev python-setuptools python-dev python-pip
-RUN pip install ansible
-RUN mkdir -p /etc/ansible
+RUN apt install -y software-properties-common git
+RUN apt-add-repository -y ppa:ansible/ansible
+RUN apt -y update && apt -y install ansible
 
 COPY docker/initctl_faker .
 RUN chmod +x initctl_faker && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl
