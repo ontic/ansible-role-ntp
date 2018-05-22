@@ -40,19 +40,19 @@
     - 'configure'
     - 'service'
 
-- include: 'package.yml'
+- import_tasks: 'package.yml'
   tags:
     - 'ntp'
     - 'ntp-package'
     - 'package'
 
-- include: 'configure.yml'
+- import_tasks: 'configure.yml'
   tags:
     - 'ntp'
     - 'ntp-configure'
     - 'configure'
 
-- include: 'service.yml'
+- import_tasks: 'service.yml'
   tags:
     - 'ntp'
     - 'ntp-service'
